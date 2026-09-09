@@ -11,12 +11,11 @@ struct ListScreenCardView: View {
     @StateObject var vm: ListScreenCardViewModel
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             AsyncImage(url: URL(string: vm.getImageURL())) { phase in
                 if let image = phase.image {
                     image
                         .resizable()
-                        .frame(maxWidth: 210, maxHeight: 295)
                         .aspectRatio(contentMode: .fit)
                 } else if phase.error != nil {
                     ErrorImage()
@@ -25,11 +24,11 @@ struct ListScreenCardView: View {
                 }
             }
             
-            VStack {
+            VStack(alignment: .leading) {
                 Text(vm.getTitle())
                     .font(.headline)
                 
-                Text(vm.getAverageRating())
+                Text("\(vm.getAverageRating())")
                     .font(.body)
             }
             .padding(.vertical, 4)

@@ -15,13 +15,14 @@ struct ErrorImage: View {
                 .frame(maxWidth: 32, maxHeight: 32)
                 .foregroundStyle(.secondary)
             
-            Text("Tidak dapat memuat gambar")
+            Text("Image not found")
                 .font(.footnote)
                 .fontWeight(.regular)
                 .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
         }
         .padding()
-        .frame(width: 210, height: 295)
+        .frame(maxWidth: .infinity, minHeight: 250, maxHeight: .infinity)
         .background(.tertiary.opacity(0.3))
     }
 }

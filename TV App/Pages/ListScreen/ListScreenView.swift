@@ -8,11 +8,57 @@
 import SwiftUI
 
 struct ListScreenView: View {
+    @StateObject var vm: ListScreenViewModel
+    
     var body: some View {
-        Text("List Screen")
+        switch vm.stateView {
+        case .loading:
+            ProgressView()
+        case .error(_):
+            VStack(spacing: 16) {
+                Image(systemName: "exclamationmark.triangle")
+                    .resizable()
+                    .frame(maxWidth: 64, maxHeight: 64)
+                    .foregroundStyle(.red)
+                
+                Text("Unable to load shows")
+                    .font(.headline)
+                    .fontWeight(.regular)
+                    .foregroundStyle(.secondary)
+                
+                Button {
+                    vm.refresh()
+                } label: {
+                    Text("Retry")
+                        .font(.body)
+                        .padding(.horizontal)
+                }
+                .buttonStyle(.borderedProminent)
+
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        case .content(let data):
+            ScrollView {
+                LazyVGrid(columns: vm.columns) {
+                    ForEach(data, id: \.self) { data in
+                        ListScreenCardView(vm:
+                            ListScreenCardViewModel(
+                                model: ListScreenCardModel(
+                                    imageURL: data.image?.medium,
+                                    title: data.name,
+                                    rating: data.rating.average
+                                )
+                            )
+                        )
+                    }
+                }
+                .padding()
+            }
+        }
     }
 }
 
 #Preview {
-    ListScreenView()
+    ListScreenView(vm: ListScreenViewModel())
 }

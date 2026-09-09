@@ -14,22 +14,23 @@ class ListScreenCardViewModel: ObservableObject {
     }
     
     private let model: ListScreenCardModel
+    private let imagePlaceholder: String = "https://placehold.co/210x295/png"
 }
 
 extension ListScreenCardViewModel {
-    func getImageURL() -> String { self.model.imageURL }
+    func getImageURL() -> String { self.model.imageURL ?? imagePlaceholder}
     func getTitle() -> String { self.model.title }
-    func getAverageRating() -> String {
+    func getAverageRating() ->String {
         if let rating = self.model.rating {
-            return "\(rating, default: "%.1f")"
+            return ("\(rating, default: "%.1f")")
         } else {
-            return "No ratings yet"
+            return ("No ratings yet")
         }
     }
 }
 
 struct ListScreenCardModel {
-    let imageURL: String
+    let imageURL: String?
     let title: String
     let rating: Double?
 }
