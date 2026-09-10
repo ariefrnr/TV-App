@@ -6,11 +6,21 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		235A18A13052B5710019D9F5 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 235A18A03052B5710019D9F5 /* Development.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		235A18A03052B5710019D9F5 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		239B3AFE3051398700A8C473 /* TV App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		235A18A43052B7200019D9F5 /* Images */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Images;
+			sourceTree = "<group>";
+		};
 		239B3B003051398700A8C473 /* TV App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TV App";
@@ -32,6 +42,8 @@
 		239B3AF53051398700A8C473 = {
 			isa = PBXGroup;
 			children = (
+				235A18A03052B5710019D9F5 /* Development.xcconfig */,
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
 				239B3AFF3051398700A8C473 /* Products */,
 			);
@@ -61,6 +73,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
 			);
 			name = "TV App";
@@ -109,6 +122,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				235A18A13052B5710019D9F5 /* Development.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +262,7 @@
 		};
 		239B3B0A3051398800A8C473 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,6 +271,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TV-App-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -286,6 +302,7 @@
 		};
 		239B3B0B3051398800A8C473 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,6 +311,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TV-App-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
