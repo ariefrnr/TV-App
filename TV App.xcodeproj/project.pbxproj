@@ -16,6 +16,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		235A18A43052B7200019D9F5 /* Images */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Images;
+			sourceTree = "<group>";
+		};
 		239B3B003051398700A8C473 /* TV App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TV App";
@@ -38,6 +43,7 @@
 			isa = PBXGroup;
 			children = (
 				235A18A03052B5710019D9F5 /* Development.xcconfig */,
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
 				239B3AFF3051398700A8C473 /* Products */,
 			);
@@ -67,6 +73,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
 			);
 			name = "TV App";
@@ -255,6 +262,7 @@
 		};
 		239B3B0A3051398800A8C473 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,6 +302,7 @@
 		};
 		239B3B0B3051398800A8C473 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
