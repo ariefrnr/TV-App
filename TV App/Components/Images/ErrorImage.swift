@@ -15,7 +15,7 @@ struct ErrorImage: View {
                 .frame(maxWidth: 32, maxHeight: 32)
                 .foregroundStyle(.secondary)
             
-            Text("Image not found")
+            Text("Image not awailable")
                 .font(.footnote)
                 .fontWeight(.regular)
                 .foregroundStyle(.secondary)
