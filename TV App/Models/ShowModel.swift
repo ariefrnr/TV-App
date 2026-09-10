@@ -8,54 +8,54 @@
 struct ShowModel: Decodable, Hashable {
     let id: Int
     let url: String
-    let name: String
-    let type: String
-    let language: String
-    let genres: [String]
-    let status: String
+    let name: String?
+    let type: String?
+    let language: String?
+    let genres: [String]?
+    let status: String?
     let runtime: Int?
-    let averageRuntime: Int
-    let premiered: String
+    let averageRuntime: Int?
+    let premiered: String?
     let ended: String?
     let officialSite: String?
-    let schedule: ScheduleModel
-    let rating: Rating
-    let weight: Int
+    let schedule: ScheduleModel?
+    let rating: RatingModel?
+    let weight: Int?
     let network: NetworkModel?
-    let webChannel: WebChannel?
+    let webChannel: WebChannelModel?
     let dvdCountry: CountryModel?
-    let externals: ExternalModel
+    let externals: ExternalModel?
     let image: ImageModel?
-    let summary: String
-    let updated: Int
-    let _links: LinkModel
+    let summary: String?
+    let updated: Int?
+    let _links: LinkModel?
 }
 
 struct ScheduleModel: Decodable, Hashable {
-    let time: String
-    let days: [String]
+    let time: String?
+    let days: [String]?
 }
 
-struct Rating: Decodable, Hashable {
+struct RatingModel: Decodable, Hashable {
     let average: Double?
 }
 
 struct NetworkModel: Decodable, Hashable {
     let id: Int
-    let name: String
-    let country: CountryModel
+    let name: String?
+    let country: CountryModel?
     let officialSite: String?
 }
 
 struct CountryModel: Decodable, Hashable {
-    let name: String
-    let code: String
-    let timezone: String
+    let name: String?
+    let code: String?
+    let timezone: String?
 }
 
-struct WebChannel: Decodable, Hashable {
+struct WebChannelModel: Decodable, Hashable {
     let id: Int
-    let name: String
+    let name: String?
     let country: CountryModel?
     let officialSite: String?
 }
@@ -67,13 +67,13 @@ struct ExternalModel: Decodable, Hashable {
 }
 
 struct ImageModel: Decodable, Hashable {
-    let medium: String
-    let original: String
+    let medium: String?
+    let original: String?
 }
 
 struct LinkModel: Decodable, Hashable {
-    let selfLink: SelfLinkModel
-    let previousEpisode: PreviousEpisodeModel
+    let selfLink: SelfLinkModel?
+    let previousEpisode: PreviousEpisodeModel?
     
     enum CodingKeys: String, CodingKey {
         case selfLink = "self"
@@ -82,10 +82,10 @@ struct LinkModel: Decodable, Hashable {
 }
 
 struct SelfLinkModel: Decodable, Hashable {
-    let href: String
+    let href: String?
 }
 
 struct PreviousEpisodeModel: Decodable, Hashable {
-    let href: String
-    let name: String
+    let href: String?
+    let name: String?
 }
