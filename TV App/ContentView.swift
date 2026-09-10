@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ListScreenView(vm: ListScreenViewModel())
+        NavigationStack {
+            ListScreenView(vm: ListScreenViewModel())
+        }
     }
 }
 

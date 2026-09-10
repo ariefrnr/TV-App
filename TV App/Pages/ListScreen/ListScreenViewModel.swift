@@ -8,14 +8,14 @@
 import SwiftUI
 import Combine
 
-enum StateView {
+enum ListScreenStateView {
     case loading
     case content([ShowModel])
     case error(Error)
 }
 
 class ListScreenViewModel: ObservableObject {
-    @Published var stateView: StateView = .loading
+    @Published var stateView: ListScreenStateView = .loading
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
@@ -35,7 +35,7 @@ extension ListScreenViewModel {
 }
 
 private extension ListScreenViewModel {
-    func updateStateView(with state: StateView) {
+    func updateStateView(with state: ListScreenStateView) {
         DispatchQueue.main.async {
             self.stateView = state
         }

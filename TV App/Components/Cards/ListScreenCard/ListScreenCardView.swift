@@ -12,27 +12,53 @@ struct ListScreenCardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            AsyncImage(url: URL(string: vm.getImageURL())) { phase in
-                if let image = phase.image {
+            ZStack(alignment: .bottomTrailing) {
+                AsyncImage(url: URL(string: vm.getImageURL())) { image in
                     image
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                } else if phase.error != nil {
+                } placeholder: {
                     ErrorImage()
-                } else {
-                    ProgressView()
+                    
+                    LinearGradient(
+                        colors: [.clear, .black.opacity(0.6)],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                 }
+                .clipShape(RoundedRectangle(cornerRadius: 16))
+            
+                Image(systemName: "play.circle.fill")
+                    .font(.title)
+                    .foregroundStyle(.white)
+                    .padding(12)
             }
             
             VStack(alignment: .leading) {
                 Text(vm.getTitle())
                     .font(.headline)
-                
-                Text("\(vm.getAverageRating())")
-                    .font(.body)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(2)
+
+                HStack(spacing: 4) {
+                    Text("\(vm.getAverageRating())")
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .foregroundStyle(.secondary)
+
+                    Image(systemName: "star.fill")
+                        .font(.footnote)
+                        .fontWeight(.regular)
+                        .foregroundStyle(.secondary)
+                }
             }
             .padding(.vertical, 4)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
     }
 }
 

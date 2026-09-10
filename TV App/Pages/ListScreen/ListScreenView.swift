@@ -42,18 +42,25 @@ struct ListScreenView: View {
             ScrollView {
                 LazyVGrid(columns: vm.columns) {
                     ForEach(data, id: \.self) { data in
-                        ListScreenCardView(vm:
-                            ListScreenCardViewModel(
-                                model: ListScreenCardModel(
-                                    imageURL: data.image?.medium,
-                                    title: data.name,
-                                    rating: data.rating.average
+                        NavigationLink {
+                            DetailScreenView(vm: DetailScreenViewModel(id: data.id))
+                        } label: {
+                            ListScreenCardView(vm:
+                                ListScreenCardViewModel(
+                                    model: ListScreenCardModel(
+                                        imageURL: data.image?.medium,
+                                        title: data.name ?? "Unknown",
+                                        rating: data.rating?.average
+                                    )
                                 )
                             )
-                        )
+                        }
+                        .buttonStyle(.plain)
+
                     }
                 }
                 .padding()
+                .navigationTitle("Discover")
             }
         }
     }
