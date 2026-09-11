@@ -29,7 +29,7 @@ class DetailScreenViewModel: ObservableObject, TVMazeServiceProtocol {
     private let service: TVMazeServiceProtocol
     private var showModel: ShowModel?
     private var seasonSectionModel: [SeasonSectionModel]?
-    private var episodeSectionModel: [EpisodeSectionModel]?
+    private var episodeSectionModel: [EpisodeModel]?
     private var casterSectionModel: [CasterSectionModel]?
     private var averageRatingSectionModel: [AverageRatingSectionModel]?
     
@@ -87,7 +87,7 @@ extension DetailScreenViewModel {
     func getShowURL() -> String? { self.showModel?.url ?? nil }
     func getPremiereDate() -> String { self.showModel?.premiered ?? "Unknown"}
     func getSeasons() -> [SeasonSectionModel]? { self.seasonSectionModel ?? nil }
-    func getEpisodes() -> [EpisodeSectionModel]? { self.episodeSectionModel ?? nil }
+    func getEpisodes() -> [EpisodeModel]? { self.episodeSectionModel ?? nil }
     func getCasters() -> [CasterSectionModel]? { self.casterSectionModel ?? nil }
     
     func getAverageRating() -> String {
@@ -129,14 +129,6 @@ private extension DetailScreenViewModel {
                 )
             }
             
-            let listEpisodes = episodes.map { episode in
-                EpisodeSectionModel(
-                    id: episode.id,
-                    name: (episode.name == "" ? "Unknown" : episode.name) ?? "Unknown",
-                    airdate: episode.airdate ?? "-"
-                )
-            }
-            
             let listSeasons = seasons.map { season in
                 SeasonSectionModel(
                     id: season.id,
@@ -146,7 +138,7 @@ private extension DetailScreenViewModel {
             }
             
             self.casterSectionModel = listCasters
-            self.episodeSectionModel = listEpisodes
+            self.episodeSectionModel = episodes
             self.seasonSectionModel = listSeasons
             self.showModel = show
         }
