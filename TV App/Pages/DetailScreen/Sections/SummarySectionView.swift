@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SummarySectionView: View {
-    let summary: String
+    @StateObject var vm: DetailScreenViewModel
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -17,9 +17,10 @@ struct SummarySectionView: View {
                 .foregroundStyle(.primary)
                 .fontWeight(.semibold)
             
-            Text(summary)
+            Text(vm.getSummary())
                 .font(.body)
                 .foregroundStyle(.secondary)
+                .fontWeight(.regular)
         }
         .padding(.horizontal)
     }

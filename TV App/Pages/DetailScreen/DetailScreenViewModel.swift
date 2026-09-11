@@ -16,12 +16,10 @@ enum DetailScreenStateView {
 
 class DetailScreenViewModel: ObservableObject {
     @Published var stateView: DetailScreenStateView = .loading
-//    @Published private var seasonCardModel: [SeasonCardModel]?
     
-    init (id: Int, model: ShowModel? = nil, seasonCardModel: [SeasonCardModel]? = nil) {
+    init (id: Int, model: ShowModel? = nil) {
         self.id = id
         self.model = model
-        self.seasonCardModel = seasonCardModel
         
         if model == nil {
             Task {
@@ -37,9 +35,32 @@ class DetailScreenViewModel: ObservableObject {
     
     private let id: Int
     private var model: ShowModel?
-    private var seasonCardModel: [SeasonCardModel]?
+    private var seasonSectionModel: [SeasonSectionModel]?
     private var episodeSectionModel: [EpisodeSectionModel]?
     private var casterSectionModel: [CasterSectionModel]?
+    private var averageRatingSectionModel: [AverageRatingSectionModel]?
+    
+    struct SeasonSectionModel: Hashable {
+        let id: Int
+        let name: String?
+        let imageURL: String?
+    }
+    
+    struct EpisodeSectionModel: Hashable, Identifiable {
+        let id: Int
+        let name: String
+        let airdate: String
+    }
+    
+    struct CasterSectionModel: Hashable {
+        let name: String
+        let imageURL: String?
+    }
+    
+    struct AverageRatingSectionModel {
+        let averageRating: String?
+        let premiereDate: String?
+    }
 }
 
 extension DetailScreenViewModel {
@@ -47,10 +68,9 @@ extension DetailScreenViewModel {
     func getTitle() -> String { self.model?.name ?? "Title not available" }
     func getSummary() -> String { self.model?.summary?.strippingHTML() ?? "Summary not available" }
     func getPremiereDate() -> String { self.model?.premiered ?? "Unknown"}
-    func getSeasons() -> [SeasonCardModel] { self.seasonCardModel ?? [] }
-    func getEpisodes() -> [EpisodeSectionModel] { self.episodeSectionModel ?? [] }
-    func getCasters() -> [CasterSectionModel] { self.casterSectionModel ?? [] }
-    func getShowURL() -> String? { self.model?.url ?? nil }
+    func getSeasons() -> [SeasonSectionModel]? { self.seasonSectionModel ?? nil }
+    func getEpisodes() -> [EpisodeSectionModel]? { self.episodeSectionModel ?? nil }
+    func getCasters() -> [CasterSectionModel]? { self.casterSectionModel ?? nil }
     
     func getAverageRating() -> String {
         if let average = self.model?.rating?.average {
@@ -125,7 +145,7 @@ private extension DetailScreenViewModel {
             }
             
             let listSeasons = seasons.map { season in
-                SeasonCardModel(
+                SeasonSectionModel(
                     id: season.id,
                     name: season.name ?? "Unknown",
                     imageURL: season.image?.medium
@@ -134,7 +154,7 @@ private extension DetailScreenViewModel {
             
             self.casterSectionModel = listCasters
             self.episodeSectionModel = listEpisodes
-            self.seasonCardModel = listSeasons
+            self.seasonSectionModel = listSeasons
             self.model = show
             
         }

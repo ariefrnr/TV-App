@@ -19,7 +19,7 @@ struct DetailScreenView: View {
         case .content:
             ScrollView {
                 VStack(alignment: .leading, spacing: 32) {
-                    ImageSectionView(url: vm.getImageURL())
+                    ImageSectionView(vm: vm)
                     
                     HStack {
                         Text(vm.getTitle())
@@ -41,20 +41,11 @@ struct DetailScreenView: View {
                     }
                     .padding(.horizontal)
                     
-                    SummarySectionView(summary: vm.getSummary())
-                    AverageRatingSectionView(
-                        averageRating: vm.getAverageRating(),
-                        premiereDate: vm.getPremiereDate()
-                    )
-                    SeasonSectionView(
-                        vm: SeasonSectionViewModel(
-                            models: vm.getSeasons()
-                        )
-                    )
-                    
-                    EpisodeSectionView(vm: EpisodeSectionViewModel(model: vm.getEpisodes()))
-                    
-                    CasterSectionView(casters: vm.getCasters())
+                    SummarySectionView(vm: vm)
+                    AverageRatingSectionView(vm: vm)
+                    SeasonSectionView(vm: vm)
+                    EpisodeSectionView(vm: vm)
+                    CasterSectionView(vm: vm)
                 }
                 .navigationTitle(vm.getTitle())
                 .navigationBarTitleDisplayMode(.inline)
