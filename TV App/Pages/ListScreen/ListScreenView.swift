@@ -38,10 +38,10 @@ struct ListScreenView: View {
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        case .content(let data):
+        case .content:
             ScrollView {
                 LazyVGrid(columns: vm.columns) {
-                    ForEach(data, id: \.self) { data in
+                    ForEach(vm.shows, id: \.self) { data in
                         NavigationLink {
                             DetailScreenView(vm: DetailScreenViewModel(id: data.id))
                         } label: {
