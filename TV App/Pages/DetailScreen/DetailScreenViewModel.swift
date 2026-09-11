@@ -40,6 +40,7 @@ class DetailScreenViewModel: ObservableObject {
     private var seasonCardModel: [SeasonCardModel]?
     private var episodeSectionModel: [EpisodeSectionModel]?
     private var casterSectionModel: [CasterSectionModel]?
+    private var averageRatingSectionModel: [AverageRatingSectionModel]?
 }
 
 extension DetailScreenViewModel {

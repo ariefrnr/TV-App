@@ -28,10 +28,16 @@ struct DetailScreenView: View {
                         .padding(.horizontal)
                     
                     SummarySectionView(summary: vm.getSummary())
+                    
                     AverageRatingSectionView(
-                        averageRating: vm.getAverageRating(),
-                        premiereDate: vm.getPremiereDate()
+                        vm: AverageRatingSectionViewModel(
+                            model: AverageRatingSectionModel(
+                                averageRating: vm.getAverageRating(),
+                                premiereDate: vm.getPremiereDate()
+                            )
+                        )
                     )
+                    
                     SeasonSectionView(
                         vm: SeasonSectionViewModel(
                             models: vm.getSeasons()

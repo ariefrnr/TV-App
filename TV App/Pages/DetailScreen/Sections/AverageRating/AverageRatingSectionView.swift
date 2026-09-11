@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct AverageRatingSectionView: View {
-    let averageRating: String
-    let premiereDate: String?
+    @StateObject var vm: AverageRatingSectionViewModel
     
     var body: some View {
         VStack {
@@ -20,7 +19,7 @@ struct AverageRatingSectionView: View {
                     .fontWeight(.semibold)
                 
                 HStack(spacing: 4) {
-                    Text(averageRating)
+                    Text(vm.getAverageRating())
                         .font(.largeTitle)
                         .fontWeight(.bold)
                     
@@ -28,7 +27,7 @@ struct AverageRatingSectionView: View {
                         .font(.title2)
                 }
                 
-                Text("Premiered at " + (premiereDate ?? "-"))
+                Text("Premiered at " + vm.getPremiereDate())
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .leading)
