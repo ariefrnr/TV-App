@@ -10,7 +10,6 @@ import SwiftUI
 struct DetailScreenView: View {
     @StateObject var vm: DetailScreenViewModel
     
-    
     var body: some View {
         switch vm.stateView {
         case .loading:
@@ -22,10 +21,25 @@ struct DetailScreenView: View {
                 VStack(alignment: .leading, spacing: 32) {
                     ImageSectionView(vm: vm)
                     
-                    Text(vm.getTitle())
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .padding(.horizontal)
+                    HStack {
+                        Text(vm.getTitle())
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        Spacer()
+                        
+                        if let url = vm.getShowURL() {
+                            ShareLink(
+                                item: url,
+                                subject: Text(vm.getTitle()),
+                                message: Text(vm.getSummary())
+                            ) {
+                                Label("share", systemImage: "square.and.arrow.up")
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
                     
                     SummarySectionView(vm: vm)
                     AverageRatingSectionView(vm: vm)
