@@ -6,11 +6,37 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		235A18A13052B5710019D9F5 /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 235A18A03052B5710019D9F5 /* Development.xcconfig */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2352C58430539EC900778DC9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 239B3AF63051398700A8C473 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 239B3AFD3051398700A8C473;
+			remoteInfo = "TV App";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		2352C58030539EC900778DC9 /* TV App Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TV App Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		235A18A03052B5710019D9F5 /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
 		239B3AFE3051398700A8C473 /* TV App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TV App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2352C58130539EC900778DC9 /* TV App Tests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "TV App Tests";
+			sourceTree = "<group>";
+		};
+		235A18A43052B7200019D9F5 /* Images */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Images;
+			sourceTree = "<group>";
+		};
 		239B3B003051398700A8C473 /* TV App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "TV App";
@@ -19,6 +45,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2352C57D30539EC900778DC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		239B3AFB3051398700A8C473 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -32,7 +65,10 @@
 		239B3AF53051398700A8C473 = {
 			isa = PBXGroup;
 			children = (
+				235A18A03052B5710019D9F5 /* Development.xcconfig */,
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
+				2352C58130539EC900778DC9 /* TV App Tests */,
 				239B3AFF3051398700A8C473 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				239B3AFE3051398700A8C473 /* TV App.app */,
+				2352C58030539EC900778DC9 /* TV App Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +85,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2352C57F30539EC900778DC9 /* TV App Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2352C58630539EC900778DC9 /* Build configuration list for PBXNativeTarget "TV App Tests" */;
+			buildPhases = (
+				2352C57C30539EC900778DC9 /* Sources */,
+				2352C57D30539EC900778DC9 /* Frameworks */,
+				2352C57E30539EC900778DC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2352C58530539EC900778DC9 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2352C58130539EC900778DC9 /* TV App Tests */,
+			);
+			name = "TV App Tests";
+			packageProductDependencies = (
+			);
+			productName = "TV App Tests";
+			productReference = 2352C58030539EC900778DC9 /* TV App Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		239B3AFD3051398700A8C473 /* TV App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 239B3B093051398800A8C473 /* Build configuration list for PBXNativeTarget "TV App" */;
@@ -61,6 +121,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				235A18A43052B7200019D9F5 /* Images */,
 				239B3B003051398700A8C473 /* TV App */,
 			);
 			name = "TV App";
@@ -80,6 +141,10 @@
 				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
+					2352C57F30539EC900778DC9 = {
+						CreatedOnToolsVersion = 26.5;
+						TestTargetID = 239B3AFD3051398700A8C473;
+					};
 					239B3AFD3051398700A8C473 = {
 						CreatedOnToolsVersion = 26.5;
 					};
@@ -100,21 +165,37 @@
 			projectRoot = "";
 			targets = (
 				239B3AFD3051398700A8C473 /* TV App */,
+				2352C57F30539EC900778DC9 /* TV App Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		239B3AFC3051398700A8C473 /* Resources */ = {
+		2352C57E30539EC900778DC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		239B3AFC3051398700A8C473 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				235A18A13052B5710019D9F5 /* Development.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2352C57C30539EC900778DC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		239B3AFA3051398700A8C473 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +205,57 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2352C58530539EC900778DC9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 239B3AFD3051398700A8C473 /* TV App */;
+			targetProxy = 2352C58430539EC900778DC9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		2352C58730539EC900778DC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3CRY833KVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ariefrnr.TV-App-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TV App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TV App";
+			};
+			name = Debug;
+		};
+		2352C58830539EC900778DC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3CRY833KVA;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ariefrnr.TV-App-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TV App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/TV App";
+			};
+			name = Release;
+		};
 		239B3B073051398800A8C473 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -248,6 +379,7 @@
 		};
 		239B3B0A3051398800A8C473 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -256,6 +388,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TV-App-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -286,6 +419,7 @@
 		};
 		239B3B0B3051398800A8C473 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 235A18A03052B5710019D9F5 /* Development.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -294,6 +428,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TV-App-Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -325,6 +460,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2352C58630539EC900778DC9 /* Build configuration list for PBXNativeTarget "TV App Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2352C58730539EC900778DC9 /* Debug */,
+				2352C58830539EC900778DC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		239B3AF93051398700A8C473 /* Build configuration list for PBXProject "TV App" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
