@@ -8,33 +8,26 @@
 import SwiftUI
 import Combine
 
-enum DetailScreenStateView {
-    case loading
-    case content
-    case error(Error)
-}
-
-class DetailScreenViewModel: ObservableObject {
-    @Published var stateView: DetailScreenStateView = .loading
+class DetailScreenViewModel: ObservableObject, TVMazeServiceProtocol {
+    
+    
+    @Published var stateView: StateView = .loading
     
     init (id: Int, model: ShowModel? = nil) {
         self.id = id
-        self.model = model
+        self.showModel = model
+        self.service = TVMazeService()
         
         if model == nil {
-            Task {
-                await self.fetchShow()
-                updateStateView(with: .content)
-            }
-            
-            
+            self.refresh()
         } else {
             updateStateView(with: .content)
         }
     }
     
     private let id: Int
-    private var model: ShowModel?
+    private let service: TVMazeServiceProtocol
+    private var showModel: ShowModel?
     private var seasonSectionModel: [SeasonSectionModel]?
     private var episodeSectionModel: [EpisodeSectionModel]?
     private var casterSectionModel: [CasterSectionModel]?
@@ -64,16 +57,41 @@ class DetailScreenViewModel: ObservableObject {
 }
 
 extension DetailScreenViewModel {
-    func getImageURL() -> String? { self.model?.image?.original }
-    func getTitle() -> String { self.model?.name ?? "Title not available" }
-    func getSummary() -> String { self.model?.summary?.strippingHTML() ?? "Summary not available" }
-    func getPremiereDate() -> String { self.model?.premiered ?? "Unknown"}
+    func getShows() async throws -> [ShowModel] {
+        return []
+    }
+    
+    func getShow(id: Int) async throws -> ShowModel {
+        let show = try await self.service.getShow(id: id)
+        return show
+    }
+    
+    func getEpisodes(id: Int) async throws -> [EpisodeModel] {
+        let episodes = try await self.service.getEpisodes(id: id)
+        return episodes
+    }
+    
+    func getSeasons(id: Int) async throws -> [SeasonModel] {
+        let seasons = try await self.service.getSeasons(id: id)
+        return seasons
+    }
+    
+    func getCaster(id: Int) async throws -> [CasterModel] {
+        let casters = try await self.service.getCaster(id: id)
+        return casters
+    }
+    
+    func getImageURL() -> String? { self.showModel?.image?.original }
+    func getTitle() -> String { self.showModel?.name ?? "Title not available" }
+    func getSummary() -> String { self.showModel?.summary?.strippingHTML() ?? "Summary not available" }
+    func getShowURL() -> String? { self.showModel?.url ?? nil }
+    func getPremiereDate() -> String { self.showModel?.premiered ?? "Unknown"}
     func getSeasons() -> [SeasonSectionModel]? { self.seasonSectionModel ?? nil }
     func getEpisodes() -> [EpisodeSectionModel]? { self.episodeSectionModel ?? nil }
     func getCasters() -> [CasterSectionModel]? { self.casterSectionModel ?? nil }
     
     func getAverageRating() -> String {
-        if let average = self.model?.rating?.average {
+        if let average = self.showModel?.rating?.average {
             return "\(average, default: "%.1f")"
         } else {
             return "No ratings yet"
@@ -84,50 +102,25 @@ extension DetailScreenViewModel {
         updateStateView(with: .loading)
         
         Task {
-            await self.fetchShow()
+            try await self.fetchShow()
             updateStateView(with: .content)
         }
     }
 }
 
 private extension DetailScreenViewModel {
-    func updateStateView(with state: DetailScreenStateView) {
+    func updateStateView(with state: StateView) {
         DispatchQueue.main.async {
             self.stateView = state
         }
     }
     
-    func fetchShow() async {
-        guard let showURL = URL(string: "\(Environment.apiUrl)shows/\(self.id)"),
-              let seasonURL = URL(string: "\(Environment.apiUrl)shows/\(self.id)/seasons"),
-              let episodeURL = URL(string: "\(Environment.apiUrl)shows/\(self.id)/episodes"),
-              let casterURL = URL(string: "\(Environment.apiUrl)shows/\(self.id)/cast")
-        else {
-            updateStateView(with: .error(NetworkError.invalidURL))
-            return
-        }
-        
+    func fetchShow() async throws {
         do {
-            async let (showData, showResponse) = URLSession.shared.data(from: showURL)
-            async let (seasonData, seasonResponse) = URLSession.shared.data(from: seasonURL)
-            async let (episodeData, episodeResponse) = URLSession.shared.data(from: episodeURL)
-            async let (casterData, casterResponse) = URLSession.shared.data(from: casterURL)
-            
-            let (sData, sResp) = try await (showData, showResponse)
-            let (seData, seResp) = try await (seasonData, seasonResponse)
-            let (epData, epResp) = try await (episodeData, episodeResponse)
-            let (casData, casResp) = try await (casterData, casterResponse)
-            
-            try validateHTTPResponse(sResp)
-            try validateHTTPResponse(seResp)
-            try validateHTTPResponse(epResp)
-            try validateHTTPResponse(casResp)
-            
-            let decoder = JSONDecoder()
-            let show = try decoder.decode(ShowModel.self, from: sData)
-            let seasons = try decoder.decode([SeasonModel].self, from: seData)
-            let episodes = try decoder.decode([EpisodeModel].self, from: epData)
-            let casters = try decoder.decode([CasterModel].self, from: casData)
+            let show = try await self.getShow(id: self.id)
+            let casters = try await self.getCaster(id: self.id)
+            let episodes = try await self.getEpisodes(id: self.id)
+            let seasons = try await self.getSeasons(id: self.id)
             
             let listCasters = casters.map { caster in
                 CasterSectionModel(
@@ -155,19 +148,11 @@ private extension DetailScreenViewModel {
             self.casterSectionModel = listCasters
             self.episodeSectionModel = listEpisodes
             self.seasonSectionModel = listSeasons
-            self.model = show
-            
+            self.showModel = show
         }
         catch {
             print("Fetch Show Error: \(error)")
             updateStateView(with: .error(error))
-        }
-    }
-    
-    func validateHTTPResponse(_ response: URLResponse) throws {
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.invalidResponse
         }
     }
 }

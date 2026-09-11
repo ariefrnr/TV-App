@@ -8,67 +8,60 @@
 import SwiftUI
 import Combine
 
-enum ListScreenStateView {
-    case loading
-    case content([ShowModel])
-    case error(Error)
-}
-
-class ListScreenViewModel: ObservableObject {
-    @Published var stateView: ListScreenStateView = .loading
+class ListScreenViewModel: ObservableObject, TVMazeServiceProtocol {
+    @Published var stateView: StateView = .loading
+    @Published private(set) var shows: [ShowModel] = []
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     
-    init () {
+    init (service: TVMazeServiceProtocol = TVMazeService()) {
+        self.service = service
         self.refresh()
     }
+    
+    private let service: TVMazeServiceProtocol
 }
 
 extension ListScreenViewModel {
+    func getShows() async throws -> [ShowModel] {
+        do {
+            let shows = try await self.service.getShows()
+            return shows
+        } catch {
+            print(error.localizedDescription)
+            updateStateView(with: .error(error))
+            return []
+        }
+    }
+    
+    func getShow(id: Int) async throws -> ShowModel {
+        throw URLError(.badURL)
+    }
+    
+    func getEpisodes(id: Int) async throws -> [EpisodeModel] {
+        return []
+    }
+    
+    func getSeasons(id: Int) async throws -> [SeasonModel] {
+        return []
+    }
+    
+    func getCaster(id: Int) async throws -> [CasterModel] {
+        return []
+    }
+    
     func refresh() {
-        updateStateView(with: .loading)
-        
         Task {
-            await self.fetchShows()
+            self.shows = try await self.getShows()
+            updateStateView(with: .content)
         }
     }
 }
 
 private extension ListScreenViewModel {
-    func updateStateView(with state: ListScreenStateView) {
+    func updateStateView(with state: StateView) {
         DispatchQueue.main.async {
             self.stateView = state
         }
     }
-    
-    func fetchShows() async {
-        guard let url = URL(string: Environment.apiUrl + "shows?page=0") else {
-            print("Invalid URL")
-            return
-        }
-        
-        do {
-            let (data, response) = try await URLSession.shared.data(from: url)
-            
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                let shows = try JSONDecoder().decode([ShowModel].self, from: data)
-                
-                updateStateView(with: .content(shows))
-            } else {
-                updateStateView(with: .error("Failed with status code outside 200" as! Error))
-            }
-        } catch {
-            print(error.localizedDescription)
-            updateStateView(with: .error(error))
-        }
-    }
-}
-
-enum Environment {
-    static let apiUrl: String = {
-        guard let url = Bundle.main.object(forInfoDictionaryKey: "API_URL") as? String else {
-            fatalError("API_URL tidak ditemukan di Info.plist")
-        }
-        return url
-    }()
 }
