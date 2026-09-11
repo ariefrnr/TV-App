@@ -28,14 +28,14 @@ struct EpisodeSectionView: View {
                             .fontWeight(.regular)
                             .foregroundStyle(.primary)
                         
-                        Text(episode.name)
+                        Text(episode.name ?? "Unknown")
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundStyle(.primary)
                         
                         Spacer()
                         
-                        Text(episode.airdate)
+                        Text(episode.airdate ?? "-")
                             .font(.body)
                             .fontWeight(.regular)
                             .foregroundStyle(.primary)
