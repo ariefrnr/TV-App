@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AverageRatingSectionView: View {
-    @StateObject var vm: AverageRatingSectionViewModel
+    @StateObject var vm: DetailScreenViewModel
     
     var body: some View {
         VStack {

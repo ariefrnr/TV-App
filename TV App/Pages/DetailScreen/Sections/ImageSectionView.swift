@@ -8,18 +8,20 @@
 import SwiftUI
 
 struct ImageSectionView: View {
-    let url: String?
+    @StateObject var vm: DetailScreenViewModel
     
     var body: some View {
-        AsyncImage(url: URL(string: url ?? "")) { phase in
-            if let image = phase.image {
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-            } else if phase.error != nil {
-                ErrorImage()
-            } else {
-                ProgressView()
+        if let url = vm.getImageURL() {
+            AsyncImage(url: URL(string: url)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                } else if phase.error != nil {
+                    ErrorImage()
+                } else {
+                    ProgressView()
+                }
             }
         }
     }
