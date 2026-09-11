@@ -69,8 +69,8 @@ extension DetailScreenViewModel {
     func getSummary() -> String { self.model?.summary?.strippingHTML() ?? "Summary not available" }
     func getPremiereDate() -> String { self.model?.premiered ?? "Unknown"}
     func getSeasons() -> [SeasonSectionModel]? { self.seasonSectionModel ?? nil }
-    func getEpisodes() -> [EpisodeSectionModel]? { return self.episodeSectionModel ?? nil }
-    func getCasters() -> [CasterSectionModel]? { return self.casterSectionModel ?? nil }
+    func getEpisodes() -> [EpisodeSectionModel]? { self.episodeSectionModel ?? nil }
+    func getCasters() -> [CasterSectionModel]? { self.casterSectionModel ?? nil }
     
     func getAverageRating() -> String {
         if let average = self.model?.rating?.average {
